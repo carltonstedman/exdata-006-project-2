@@ -50,7 +50,7 @@ p <- qplot(year,
            geom="line",
            color=EI.Sector,
            xlab="Year",
-           ylab="Total PM2.5 Emissions from Coal (log)")
+           ylab="Total PM2.5 Emissions from Coal (log10)")
 p+theme(legend.direction="vertical",
         legend.position="bottom")
 dev.off()

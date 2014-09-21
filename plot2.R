@@ -7,9 +7,6 @@
 # read PM25 summary into data frame
 df <- readRDS("summarySCC_PM25.rds")
 
-# read in source classification codes
-scs <- readRDS("Source_Classification_Code.rds")
-
 # just get data from Baltimore City, Maryland
 data <- df[df$fips == "24510",]
 

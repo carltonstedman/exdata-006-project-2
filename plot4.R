@@ -34,7 +34,7 @@ agg <- aggregate(data$Emissions,
                  na.rm=TRUE)
 
 # plot
-png(filename="plot5.png", height=480, width=480)
+png(filename="plot4.png", height=480, width=480)
 p <- qplot(year,
            log(x, base=10),
            data=agg,

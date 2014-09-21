@@ -34,25 +34,24 @@ agg <- aggregate(data$Emissions,
                  FUN=sum,
                  na.rm=TRUE)
 
+total <- aggregate(agg$x,
+                   by=list(year = agg$year),
+                   FUN=sum,
+                   na.rm=TRUE)
+
+total$EI.Sector <- "All Motor Vehicle Sources"
+
+full <- rbind(agg, total)
+
 # plot
 png(filename="plot5.png", height=480, width=480)
-par(mfrow=c(1, 2))
 p <- qplot(year,
-           x,
-           data=agg,
-           geom="line",
-           color=EI.Sector,
-           xlab="Year",
-           ylab="Total PM2.5 Emissions, Motor Vehicles, Baltimore City, MD")
-p+theme(legend.direction="vertical",
-        legend.position="bottom")
-q <- qplot(year,
            log(x, base=10),
-           data=agg,
+           data=full,
            geom="line",
            color=EI.Sector,
            xlab="Year",
            ylab="Total PM2.5 Emissions, Motor Vehicles, Baltimore City, MD (log10)")
-q+theme(legend.direction="vertical",
+p+theme(legend.direction="vertical",
         legend.position="bottom")
 dev.off()

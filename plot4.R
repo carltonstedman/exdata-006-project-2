@@ -33,11 +33,20 @@ agg <- aggregate(data$Emissions,
                  FUN=sum,
                  na.rm=TRUE)
 
+total <- aggregate(agg$x,
+                   by=list(year = agg$year),
+                   FUN=sum,
+                   na.rm=TRUE)
+
+total$EI.Sector <- "All Coal Sources"
+
+full <- rbind(agg, total)
+
 # plot
 png(filename="plot4.png", height=480, width=480)
 p <- qplot(year,
            log(x, base=10),
-           data=agg,
+           data=full,
            geom="line",
            color=EI.Sector,
            xlab="Year",

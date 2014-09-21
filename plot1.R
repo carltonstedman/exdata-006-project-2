@@ -9,18 +9,10 @@
 # read PM25 summary into data frame
 df <- readRDS("summarySCC_PM25.rds")
 
-# read in source classification codes
-scs <- readRDS("Source_Classification_Code.rds")
-
 # sum emissions by year
 agg <- aggregate(df$Emissions, by=list(year = df$year), FUN=sum, na.rm=TRUE)
 
+# construct png lot of year vs total emissions
 png(filename="plot1.png", height=480, width=480)
-
-plot(agg$year,
-     agg$x,
-     xlab="Year",
-     ylab="Total PM2.5 Emissions",
-     type="l")
-
+plot(agg$year, agg$x, xlab="Year", ylab="Total PM2.5 Emissions", type="l")
 dev.off()
